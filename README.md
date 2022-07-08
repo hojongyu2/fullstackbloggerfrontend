@@ -104,17 +104,17 @@ Day 3:
 * page✅
 * Should be a number input field✅
 * All input fields on the <BlogsPage /> should be hooked up to the state variables in <App />✅
-* Modify the useEffect method in the <App /> component to be:
+* Modify the useEffect method in the <App /> component to be:✅
 * useEffect(() => {
 const fetchData = async () => {
 const url = `${urlEndpoint}/blogs/all-blogs?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
-const apiResponse = await fetch(url);
-const apiJSON = await apiResponse.json();
-setServerJSON(apiJSON);
-return;
-};
-fetchData();
-}, [sortField, sortOrder, filterField, filterValue, limit, page]);
+const apiResponse = await fetch(url);✅
+const apiJSON = await apiResponse.json();✅
+setServerJSON(apiJSON);✅
+return;✅
+};✅
+fetchData();✅
+}, [sortField, sortOrder, filterField, filterValue, limit, page]);✅
 * Note: The idea here is that the input fields on the <BlogsPage /> will update the state variables in <App />. Since the useEffect hook in <App /> is watching the state variables [sortField, sortOrder, filterField, filterValue, limit, page] for changes, every time the user inputs a new value into any <BlogsPage /> input field, the useEffect will trigger. The new fetch url will be calculated with the most up to date query params and will in turn refetch the new list of blogs from the server.
 
 * Implement the following in the Server
@@ -124,21 +124,21 @@ fetchData();
 "start": "PORT=4000 node ./bin/www",
 "dev": "PORT=4000 nodemon ./bin/www"
 }
-* In the "/blogs/all" route, implement the following:
+* In the "/blogs/all" route, implement the following:✅
 * Add the following variables inside the route handler function to get query param values from the incoming GET request url:
-* const limit = Number(req.query.limit)
-* const skip = Number(req.query.skip)
-* const sortField = req.query.sortField
-* const sortOrder = req.query.sortOrder
-* const filterField = req.query.filterField
-* const filterValue = req.query.filterValue
+* const limit = Number(req.query.limit)✅
+* const skip = Number(req.query.skip)✅
+* const sortField = req.query.sortField✅
+* const sortOrder = req.query.sortOrder✅
+* const filterField = req.query.filterField✅
+* const filterValue = req.query.filterValue✅
 * Update the mongo query method to properly incorporate the above variables in the query.
-* const dbResult = await collection
-.find({[filterField]: filterValue})
-.sort({[sortField]: sortOrder})
-.limit(limit)
-.skip(skip)
-.toArray();
+* const dbResult = await collection✅
+.find({[filterField]: filterValue})✅
+.sort({[sortField]: sortOrder})✅
+.limit(limit)✅
+.skip(skip)✅
+.toArray();✅
 * Note: sortOrder may need to be converted from "ASC" and "DESC" to 1 and -1 respectively before the query is executed.
 * Note: The above code may have to be modified depending on your implementation of the "/blogs/all" route in the fullstack blogger project. But it should be very similar in functionality to the "/blogs/all" route in the ExpressJS example.
 * Note: The sorting, filter, limit and page functionality are now being handled by the database using the mongodb query. We will no longer need to use JS functions to implement this functionality on the blogs dataset anymore.

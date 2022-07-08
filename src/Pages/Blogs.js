@@ -1,12 +1,11 @@
-
+import React from "react";
 
 const BlogsPage = ({ serverJSON, sortField, setSortField, sortOrder, setSortOrder, filterField, setFilterField, filterValue, setFilterValue, limit, setLimit, page, setPage}) => {
     return (
       <div className="blogs-page">
         <h1>Blogs Page</h1>
-
-        <form>
-
+        
+            <label>sortField: </label>
         <select value={sortField} onChange={(e)=>{
             const value = e.target.value
             setSortField(value)
@@ -14,16 +13,21 @@ const BlogsPage = ({ serverJSON, sortField, setSortField, sortOrder, setSortOrde
             <option value='title'>title</option>
             <option value='author'>author</option>
             <option value='createdAt'>createdAt</option>
+            <option value="id">id</option>
         </select>
+        <br/>
 
+        <label>sortOrder</label>
         <select value={sortOrder} onChange={(e)=>{
             const value = e.target.value
             setSortOrder(value)
-        }}>sortOrder
+        }}>
             <option value="ASC">ASC</option>
             <option value="DESC">DESC</option>
         </select>
+        <br/>
 
+        <label>filterField</label>
         <select value={filterField} onChange={(e)=>{
             const value = e.target.value
             setFilterField(value)
@@ -38,22 +42,15 @@ const BlogsPage = ({ serverJSON, sortField, setSortField, sortOrder, setSortOrde
             setFilterValue(value)
         }}></input><br/>
 
-        page: <input text value={page} onChange={(e)=>{
+        page: <input type="number" min="1" value={page} onChange={(e)=>{
             const value = e.target.value
             setPage(value)
-        }} required={Number}></input><br/>
+        }}></input><br/>
 
-        limit: <input text value={limit} onChange={(e)=>{
+        limit: <input type="number" min="1" value={limit} onChange={(e)=>{
             const value = e.target.value
             setLimit(value)
-        }} required={Number}></input>
-
-        <input type="submit" value="submit" onClick={(e)=>{
-            const value = e.target.value
-            
         }}></input>
-
-        </form>
 
         <p>
           {serverJSON.map((blog) => {
