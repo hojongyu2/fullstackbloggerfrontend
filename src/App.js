@@ -7,18 +7,8 @@ const urlEndpoint = "http://localhost:4000";
 
 function App() {
 
-  const [serverJSON, setServerJSON] = useState(null)
+  const [serverJSON, setServerJSON] = useState({message:[]})
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const apiResponse = await fetch(`${urlEndpoint}/blogs/hello-blogs`);
-  //     const apiJSON = await apiResponse.json();
-  //     setServerJSON(apiJSON);
-  //     return;
-  //   };
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
 
     const fetchData = async () => {
@@ -30,17 +20,26 @@ function App() {
     };
     fetchData();
   }, []); 
+  
+  const [sortField, setSortField] = useState(null)
+  const [sortOrder, setSortOrder] = useState('ASC')
+  const [filterField, setFilterField] = useState(null)
+  const [filterValue, setFilterValue] = useState(null)
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
+  
 
   return (
     <div className="App">
       <header className="App-header">
       <Routes>
-        {serverJSON && (
-          <Route
-            path="/blogs"
-            element={<BlogsPage blogs={serverJSON} />}
-          ></Route>
-        )}
+          <Route path="/blogs" element={<BlogsPage serverJSON={serverJSON.message} 
+          sortField={sortField} setSortField={setSortField} 
+          sortOrder={sortOrder} setSortOrder={setSortOrder} 
+          filterField={filterField} setFilterField={setFilterField}
+          filterValue={filterValue} setFilterValue={setFilterValue}
+          limit={limit} setLimit={setLimit}
+          page={page} setPage={setPage}/>}/>
       </Routes>
       </header>
     </div>
