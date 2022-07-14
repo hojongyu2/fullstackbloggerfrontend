@@ -5,6 +5,7 @@ import BlogsPage from './Pages/Blogs'
 import PostBlogPage from './Pages/PostBlogPage'
 import BlogManager from './Pages/BlogManager'
 
+// url as a variable from backend 
 const urlEndpoint = "http://localhost:4000";
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
   const [isFetching, setIsFetching] = useState(false);
  
   useEffect(() => {
-
+    // fetch it using url variable
     const fetchData = async () => {
       const url = `${urlEndpoint}/blogs/all-blogs?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
       const apiResponse = await fetch(url);
@@ -53,11 +54,15 @@ const App = () => {
   const [adminBlogList, setAdminBlogList] = useState([]);
   const [adminBlogsLoading, setAdminBlogsLoading] = useState(false);
   
+
   useEffect(() => {
     const fetchAdminBlogList = async () => {
       const apiResponse = await fetch(`${urlEndpoint}/admin/blog-list`);
       const json = await apiResponse.json();
-      setAdminBlogList(json);
+
+      // to check what I'm GETTING back from the request(backend)
+      console.log("json from backend: ", json)
+      setAdminBlogList(json.message);
       return json;
     }
     fetchAdminBlogList()
@@ -67,6 +72,7 @@ const App = () => {
     setAdminBlogsLoading(true)
     const url = `${urlEndpoint}/admin/delete-blog/${blogId}`
     const response = await fetch(url, {
+      // make sure to call what method you are using
       method: 'DELETE'
     });
     const responseJSON = await response.json();

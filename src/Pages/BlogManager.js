@@ -1,10 +1,17 @@
 import React from "react"
-
-
-const BlogManager = () => {
+import BlogManagerCard from "../components/BlogManagerCard"
+// imported BlogManagerCard from components
+const BlogManager = ({ adminBlogList, deleteBlog }) => {
 
     return (
-        <div>hi all</div>
+        <div className="container">
+            {adminBlogList.map((blog)=>{
+            return (
+                
+                // ans sending it down as child component
+                <BlogManagerCard blog={blog} key={blog.id} deleteBlog={deleteBlog}/>
+            )
+        })}</div>
     )
 }
 
