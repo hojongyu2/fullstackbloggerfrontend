@@ -24,6 +24,7 @@ const App = () => {
     const fetchData = async () => {
       const url = `${urlEndpoint}/blogs/all-blogs?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
       const apiResponse = await fetch(url);
+      // console.log(apiResponse)
       const apiJSON = await apiResponse.json();
       setServerJSON(apiJSON);
       return;
@@ -50,7 +51,7 @@ const App = () => {
     return responseJSON;
   }
 
-  // BlogPostManager 
+  ///////////////////// BlogPostManager 
   const [adminBlogList, setAdminBlogList] = useState([]);
   const [adminBlogsLoading, setAdminBlogsLoading] = useState(false);
   
@@ -79,6 +80,16 @@ const App = () => {
     setAdminBlogsLoading(false)
   };
 
+  // Implementing fetch data for a singgle blog/ Modal
+  const fetchSingleBlog = async (blogId) => {
+    const url = `${urlEndpoint}/blogs/single-blog/${blogId}`
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    console.log("checking ",responseJSON)
+    console.log("checking ",response)
+    return responseJSON
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -91,7 +102,7 @@ const App = () => {
           limit={limit} setLimit={setLimit}
           page={page} setPage={setPage}/>}/>
           <Route path="post-blog" element={<PostBlogPage blogSubmit={blogSubmit} setIsFetching={setIsFetching}/>} />
-          <Route path="blog-manager" element={<BlogManager adminBlogList={adminBlogList} deleteBlog={deleteBlog}/>}/>
+          <Route path="blog-manager" element={<BlogManager adminBlogList={adminBlogList} deleteBlog={deleteBlog} fetchSingleBlog={fetchSingleBlog} urlEndpoint={urlEndpoint}/>}/>
       </Routes>
       </header>
     </div>

@@ -1,8 +1,9 @@
 import React from "react"
 
-const BlogManagerCard = ({ blog, deleteBlog }) => {
+const BlogManagerCard = ({ blog, deleteBlog, fetchBlogAndShow }) => {
     return (
         <div className="blog-manager-card">
+          
             <h1>Blog Manager Card</h1>
             <p>
                 <span>
@@ -36,9 +37,14 @@ const BlogManagerCard = ({ blog, deleteBlog }) => {
             </p>
             <p>
                 <span>
-                    <button onClick={()=>{
+                    <button onClick={() => {
                         deleteBlog(blog.id)
                     }}><strong>Delete</strong></button>
+                </span>
+                <span>
+                <button onClick={() => {
+                        fetchBlogAndShow(blog.id)
+                    }}><strong>Edit</strong></button>
                 </span>
             </p>
         </div>
