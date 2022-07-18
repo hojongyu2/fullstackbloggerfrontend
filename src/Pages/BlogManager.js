@@ -7,7 +7,7 @@ const BlogManager = ({ adminBlogList, deleteBlog, fetchSingleBlog, urlEndpoint }
     // const { adminBlogList, deleteBlog, fetchSingleBlog, urlEndpoint } = props;
     // This is object destucturing. 
     // If I want to use object destucturing, Parameter inside of BlogManager has to be props.
-    
+
     const [showModal, setShowModal] = useState(false);
     const [editTitle, setEditTitle] = useState("");
     const [editAuthor, setEditAuthor] = useState("");
@@ -30,7 +30,7 @@ const BlogManager = ({ adminBlogList, deleteBlog, fetchSingleBlog, urlEndpoint }
         });
         const responseJSON = await response.json();
         console.log(responseJSON)
-        //why false?????????????????
+        
         return responseJSON
     }
 
